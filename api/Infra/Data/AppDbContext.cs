@@ -1,4 +1,5 @@
 ﻿using api.Domain.Produto;
+using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Infra.Data
@@ -13,6 +14,7 @@ namespace api.Infra.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Ignore<Notification>();
 
             builder.Entity<Produto>()
                 .Property(p => p.Nome).IsRequired();

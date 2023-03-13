@@ -1,6 +1,8 @@
-﻿namespace api.Domain
+﻿using Flunt.Notifications;
+
+namespace api.Domain
 {
-    public abstract class Entity
+    public abstract class Entity : Notifiable<Notification>
     {
         public Entity()
         {

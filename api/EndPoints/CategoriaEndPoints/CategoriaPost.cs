@@ -10,14 +10,12 @@ namespace api.EndPoints.CategoriaEndPoints
         public static Delegate Handle => Action;
         public static IResult Action(CategoriaRequest categoriaRequest, AppDbContext context)
         {
-            var categoria = new Categoria
-            {
-                Nome = categoriaRequest.Nome,
-                CreatedBy = "Teste",
-                CreatedOn = DateTime.Now,
-                EditedBy = "Teste",
-                EditedOn = DateTime.Now,    
-            };
+            var categoria = new Categoria(categoriaRequest.Nome,"Teste","Teste");
+
+            if (!categoria.IsValid)
+            {           
+                return Results.ValidationProblem(categoria.Notifications.ConvertToDetails());
+            }
 
             context.Categoria.Add(categoria);
             context.SaveChanges();
